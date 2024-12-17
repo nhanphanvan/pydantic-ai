@@ -298,6 +298,10 @@ def infer_model(model: Model | KnownModelName) -> Model:
         from .anthropic import AnthropicModel
 
         return AnthropicModel(model)
+    elif model.startswith('litellm:'):
+        from .litellm import LiteLLMModel
+
+        return LiteLLMModel(model[8:])
     else:
         raise UserError(f'Unknown model: {model}')
 
